@@ -34,7 +34,7 @@ public class App {
         System.out.println(firstProductBasket.searchProduct("перец"));
         System.out.println(secondProductBasket.searchProduct("перец"));
         System.out.println();
-        firstProductBasket.deleteProduct();
+        firstProductBasket.clear();
         firstProductBasket.printProductBasket();
         System.out.println();
         System.out.println(firstProductBasket.searchProduct("хлеб"));

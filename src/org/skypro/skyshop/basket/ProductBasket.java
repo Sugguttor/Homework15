@@ -3,7 +3,7 @@ package org.skypro.skyshop.basket;
 import org.skypro.skyshop.product.Product;
 
 public class ProductBasket {
-    public Product[] productBasket = new Product[5];
+    private final Product[] productBasket = new Product[5];
 
     public void addProduct(Product product) {
         for (int i = 0; i < productBasket.length; i++) {
@@ -48,11 +48,9 @@ public class ProductBasket {
         return false;
     }
 
-    public void deleteProduct() {
+    public void clear() {
         for (int i = 0; i < productBasket.length; i++) {
-            if (productBasket[i] != null) {
                 productBasket[i] = null;
-            }
         }
     }
 
