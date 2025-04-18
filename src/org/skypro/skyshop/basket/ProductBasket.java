@@ -15,27 +15,32 @@ public class ProductBasket {
         System.out.println("Невозможно добавить продукт");
     }
 
-    public int calculateSumOfBasket() {
-        int sum = 0;
+    public double calculateSumOfBasket() {
+        double sum = 0;
         for (Product product : productBasket) {
             if (product != null) {
-                sum = sum + product.getCost();
+                sum = sum + product.getPrice();
             }
         }
         return sum;
     }
 
     public void printProductBasket() {
-        int sum = calculateSumOfBasket();
+        double sum = calculateSumOfBasket();
+        int specialCounter = 0;
         for (Product product : productBasket) {
             if (product != null) {
-                System.out.println(product.getName() + " : " + product.getCost());
+                System.out.println(product.toString());
+                if (product.isSpecial()) {
+                    specialCounter++;
+                }
             }
         }
         if (sum == 0) {
             System.out.println("в корзине пусто");
         } else {
             System.out.println("Итого: " + sum);
+            System.out.println("Специальных товаров: " + specialCounter);
         }
     }
 
@@ -50,7 +55,7 @@ public class ProductBasket {
 
     public void clear() {
         for (int i = 0; i < productBasket.length; i++) {
-                productBasket[i] = null;
+            productBasket[i] = null;
         }
     }
 
