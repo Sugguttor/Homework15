@@ -30,10 +30,8 @@ public class SearchEngine {
         return results;
     }
 
-    public Searchable findBestMatch(String search) throws BestResultNotFound {
-        if (searchableItems == null) {
-            throw new BestResultNotFound(search);
-        }
+    public Searchable findBestMatch(String search) throws BestResultNotFoundException {
+
 
         Searchable bestMatch = null;
         int maxOccurrences = 0;
@@ -46,6 +44,9 @@ public class SearchEngine {
                 maxOccurrences = occurrences;
                 bestMatch = searchable;
             }
+        }
+        if (bestMatch == null) {
+            throw new BestResultNotFoundException(search);
         }
 
         return bestMatch;

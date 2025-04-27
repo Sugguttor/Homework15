@@ -6,15 +6,14 @@ import org.skypro.skyshop.product.DiscountedProduct;
 import org.skypro.skyshop.product.FixPriceProduct;
 import org.skypro.skyshop.product.Product;
 import org.skypro.skyshop.product.SimpleProduct;
+import org.skypro.skyshop.search.BestResultNotFoundException;
 import org.skypro.skyshop.search.SearchEngine;
-import org.skypro.skyshop.search.BestResultNotFound;
 import org.skypro.skyshop.search.Searchable;
 
 import java.util.Arrays;
-import java.util.IllegalFormatException;
 
 public class App {
-    public static void main(String[] args) throws IllegalArgumentException, BestResultNotFound {
+    public static void main(String[] args) throws IllegalArgumentException, BestResultNotFoundException {
 
         Product cucumber = new SimpleProduct("огурец", 200);
         Product tomato = new SimpleProduct("помидор", 110);
@@ -88,14 +87,14 @@ public class App {
         try {
             Searchable bestMatch = searchEngine1.findBestMatch("Маяки");
             System.out.println("Наиболее подходящий объект: " + bestMatch.getSearchTerm());
-        } catch (BestResultNotFound e) {
+        } catch (BestResultNotFoundException e) {
             System.err.println(e);
         }
 
         try {
             Searchable bestMatch = searchEngine1.findBestMatch("собака");
             System.out.println("Наиболее подходящий объект: " + bestMatch.getSearchTerm());
-        } catch (BestResultNotFound e) {
+        } catch (BestResultNotFoundException e) {
             System.err.println("Ошибка: " + e);
         }
 

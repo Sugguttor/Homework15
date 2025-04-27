@@ -11,7 +11,7 @@ public class DiscountedProduct extends Product {
             throw new IllegalArgumentException("Базовая цена задана некорректно!");
         }
         this.discount = discount;
-        if (discount <= 0 || discount > 100) {
+        if (discount < 0 || discount > 100) {
             throw new IllegalArgumentException("Скидка задана некорректно!");
         }
     }
