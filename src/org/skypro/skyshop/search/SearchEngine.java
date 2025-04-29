@@ -30,5 +30,41 @@ public class SearchEngine {
         return results;
     }
 
+    public Searchable findBestMatch(String search) throws BestResultNotFoundException {
+
+
+        Searchable bestMatch = null;
+        int maxOccurrences = 0;
+
+        for (Searchable searchable : searchableItems) {
+            String searchTerm = searchable.getSearchTerm();
+            int occurrences = countOccurrences(searchTerm, search);
+
+            if (occurrences > maxOccurrences) {
+                maxOccurrences = occurrences;
+                bestMatch = searchable;
+            }
+        }
+        if (bestMatch == null) {
+            throw new BestResultNotFoundException(search);
+        }
+
+        return bestMatch;
+    }
+
+    private int countOccurrences(String text, String subString) {
+        int count = 0;
+        int index = 0;
+        int subStringIndex;
+
+        while ((subStringIndex = text.indexOf(subString, index)) != -1) {
+            count++;
+            index = subStringIndex + subString.length();
+        }
+
+        return count;
+
+    }
+
 
 }
