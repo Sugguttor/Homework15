@@ -6,8 +6,12 @@ public interface Searchable {
 
     public String getTypeOfContent();
 
+    String getName();
+
     default String getStringRepresentation() {
-        return "имя " + getSearchTerm() + " - тип " + getTypeOfContent();
+        return getName() + "-" + getTypeOfContent();
     }
+
+
 
 }
