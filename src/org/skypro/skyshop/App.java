@@ -52,23 +52,34 @@ public class App {
 
         ProductBasket secondProductBasket = new ProductBasket();
         secondProductBasket.addProduct(pig);
-
         secondProductBasket.addProduct(chicken);
 
         firstProductBasket.printProductBasket();
         System.out.println();
+
         secondProductBasket.printProductBasket();
         System.out.println();
+
         System.out.println(firstProductBasket.searchProduct("чай"));
         System.out.println(firstProductBasket.searchProduct("перец"));
         System.out.println(secondProductBasket.searchProduct("перец"));
         System.out.println();
+
+        System.out.println(firstProductBasket.removeThisProduct("помидор"));
+        System.out.println();
+
+        firstProductBasket.printProductBasket();
+        System.out.println();
+
+        System.out.println(secondProductBasket.removeThisProduct("помидор"));
+
+
         firstProductBasket.clear();
         firstProductBasket.printProductBasket();
         System.out.println();
         System.out.println(firstProductBasket.searchProduct("хлеб"));
 
-        SearchEngine searchEngine1 = new SearchEngine(7);
+        SearchEngine searchEngine1 = new SearchEngine();
         searchEngine1.add(beer);
         searchEngine1.add(banana);
         searchEngine1.add(oatmeal);
@@ -79,10 +90,9 @@ public class App {
         System.out.println();
 
         System.out.println();
-        System.out.println(Arrays.toString(searchEngine1.search("Маяки России.")));
-        System.out.println(Arrays.toString(searchEngine1.search("пиво")));
-        System.out.println(Arrays.toString(searchEngine1.search("банан")));
-
+        System.out.println(searchEngine1.search("Маяки России."));
+        System.out.println(searchEngine1.search("пиво"));
+        System.out.println(searchEngine1.search("банан"));
 
         try {
             Searchable bestMatch = searchEngine1.findBestMatch("Маяки");
