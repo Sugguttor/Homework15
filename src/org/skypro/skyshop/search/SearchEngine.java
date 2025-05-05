@@ -1,10 +1,11 @@
 package org.skypro.skyshop.search;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.TreeMap;
 
 public class SearchEngine {
-    private final LinkedList<Searchable> searchableItems;
+    private final List<Searchable> searchableItems;
 
     public SearchEngine() {
         searchableItems = new LinkedList<>();
