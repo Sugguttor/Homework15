@@ -31,6 +31,7 @@ public class App {
         FixPriceProduct tea = new FixPriceProduct("чай");
         Article article1 = new Article("Безопасность мореплавания.", "Средства навигационного оборудования - самая важная отрасль.");
         Article article2 = new Article("Маяки России.", "Первый этап проекта — электронная энциклопедия российских исторических маяков.");
+        Article article3 = new Article("Маяки народов России.", "Второй этап проекта — сбор и оцифровка фотоархивов.");
 
         ProductBasket firstProductBasket = new ProductBasket();
 
@@ -78,10 +79,12 @@ public class App {
         searchEngine1.add(orange);
         searchEngine1.add(article2);
         searchEngine1.add(article1);
+        searchEngine1.add(article3);
+
         System.out.println();
 
         System.out.println();
-        System.out.println(searchEngine1.search("Маяки России."));
+        System.out.println(searchEngine1.search("Маяки"));
         System.out.println(searchEngine1.search("пиво"));
         System.out.println(searchEngine1.search("банан"));
 
