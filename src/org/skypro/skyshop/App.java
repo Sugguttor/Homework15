@@ -18,18 +18,8 @@ public class App {
         Product cucumber = new SimpleProduct("огурец", 200);
         Product tomato = new SimpleProduct("помидор", 110);
         Product banana = new SimpleProduct("банан", 150);
-        Product chicken = null;
-        try {
-            chicken = new SimpleProduct("    ", 210);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
-        Product pig = null;
-        try {
-            pig = new SimpleProduct("свинина", 0);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
+        Product chicken = new SimpleProduct("курица", 210);
+        Product pig = new SimpleProduct("свинина", 300);
         Product milk = new SimpleProduct("молоко", 100);
         Product beer = new SimpleProduct("пиво", 115);
         Product oatmeal = new SimpleProduct("овсянка", 80);
@@ -43,6 +33,7 @@ public class App {
         Article article2 = new Article("Маяки России.", "Первый этап проекта — электронная энциклопедия российских исторических маяков.");
 
         ProductBasket firstProductBasket = new ProductBasket();
+
         firstProductBasket.addProduct(tea);
         firstProductBasket.addProduct(tomato);
         firstProductBasket.addProduct(milk);
@@ -106,6 +97,18 @@ public class App {
             System.out.println("Наиболее подходящий объект: " + bestMatch.getSearchTerm());
         } catch (BestResultNotFoundException e) {
             System.err.println("Ошибка: " + e);
+        }
+
+        try {
+            chicken = new SimpleProduct("    ", 210);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+
+        try {
+            pig = new SimpleProduct("свинина", 0);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
         }
 
 
