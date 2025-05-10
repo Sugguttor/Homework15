@@ -1,6 +1,8 @@
 package org.skypro.skyshop.search;
 
 import java.util.*;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class SearchEngine {
     private final Set<Searchable> searchableItems;
@@ -14,23 +16,24 @@ public class SearchEngine {
     }
 
     public Set<Searchable> search(String searchString) {
-        Set<Searchable> results = new TreeSet<>(new Comparator<Searchable>() {
-            @Override
-            public int compare(Searchable o2, Searchable o1) {
-                int lengthCompare = Integer.compare(o2.getName().length(), o1.getName().length());
-                if (lengthCompare == 0) {
-                    return o2.getName().compareToIgnoreCase(o1.getName());
-                }
-                return lengthCompare;
-            }
-        });
-        for (Searchable item : searchableItems) {
-            if (item.getName().toLowerCase().contains(searchString.toLowerCase())) {
-                results.add(item);
-            }
-        }
-        return results;
+
+        return searchableItems.stream()
+                .filter(item -> item.getName().toLowerCase().contains(searchString.toLowerCase()))
+                .collect(Collectors.toCollection(() -> new TreeSet<>(new SearchResultComparator())));
+
     }
+
+    public class SearchResultComparator implements Comparator<Searchable> {
+        @Override
+        public int compare(Searchable o2, Searchable o1) {
+            int lengthCompare = Integer.compare(o2.getName().length(), o1.getName().length());
+            if (lengthCompare == 0) {
+                return o2.getName().compareToIgnoreCase(o1.getName());
+            }
+            return lengthCompare;
+        }
+    }
+
 
     public Searchable findBestMatch(String search) throws BestResultNotFoundException {
         Searchable bestMatch = null;
