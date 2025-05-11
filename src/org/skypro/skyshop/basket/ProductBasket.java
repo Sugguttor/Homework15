@@ -1,9 +1,11 @@
 package org.skypro.skyshop.basket;
 
 import org.skypro.skyshop.product.Product;
+import org.skypro.skyshop.search.SearchResultComparator;
 import org.w3c.dom.ls.LSOutput;
 
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class ProductBasket {
@@ -22,11 +24,11 @@ public class ProductBasket {
 
     public void printProductBasket() {
         double sum = calculateSumOfBasket();
-        long specialCount = calculateSpecialProducts();
         Stream<Product> basket = productBasket.values().stream().flatMap(Collection::stream);
         if (sum == 0) {
             System.out.println("в корзине пусто");
         } else {
+            long specialCount = calculateSpecialProducts();
             basket.forEach(System.out::println);
             System.out.println("Итого: " + sum);
             System.out.println("Специальных товаров: " + specialCount);
@@ -34,32 +36,24 @@ public class ProductBasket {
     }
 
     private long calculateSpecialProducts() {
-        long specialCounter = productBasket.values().stream().flatMap(Collection::stream)
+        return productBasket.values().stream().flatMap(Collection::stream)
                 .filter(x -> x.isSpecial())
                 .count();
-        return specialCounter;
     }
 
     public boolean searchProduct(String name) {
-        for (Map.Entry<String, LinkedList<Product>> product : productBasket.entrySet()) {
-            for (Product p : product.getValue()) {
-                if (p.getName().equalsIgnoreCase(name)) {
-                    return true;
-                }
-            }
-        }
-        return false;
+        return productBasket.values().stream().flatMap(Collection::stream)
+                .anyMatch(p -> p.getName().equalsIgnoreCase(name));
     }
 
     public void clear() {
         productBasket.clear();
     }
 
-    public LinkedList<Product> removeThisProduct(String name) {
-        LinkedList<Product> removedProducts = new LinkedList<>();
+    public List<Product> removeThisProduct(String name) {
+        List<Product> removedProducts = new LinkedList<>();
         if (productBasket.containsKey(name)) {
-            removedProducts.addAll(productBasket.get(name));
-            productBasket.remove(name);
+            removedProducts.addAll(productBasket.remove(name));
         }
         if (removedProducts.isEmpty()) {
             System.out.println("Список пуст");
